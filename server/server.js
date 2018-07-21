@@ -16,6 +16,15 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 /*GET*/
+app.get('/api/auth', auth, (req, res)=>{
+    res.json({
+        isAuth: true,
+        id: req.user._id,
+        email: req.user.email,
+        name: req.user.name,
+        lastName: req.user.lastName
+    })
+});
 app.get('/api/getBook', (req, res) => {
     let id = req.query.id;
 

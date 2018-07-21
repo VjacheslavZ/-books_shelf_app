@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const config = require('./config/config').get(process.env.NODE_ENV);
 const app = express();
 
-mongoose.Promise = global.Promise;
+mongoose.Promise = global.Promise;// Use native promises
 mongoose.connect(config.DATABASE);
 
 const { User } = require('./models/user');
@@ -14,7 +14,6 @@ const { auth } = require('./middleware/auth');
 
 app.use(bodyParser.json());
 app.use(cookieParser());
-
 /*GET*/
 app.get('/api/auth', auth, (req, res)=>{
     res.json({
@@ -72,7 +71,6 @@ app.get('/api/logout', auth, (req, res) => {
         res.sendStatus(200);
     })
 });
-
 /*POST*/
 app.post('/api/book', (req, res) => {
     const book = new Book(req.body);
@@ -118,7 +116,6 @@ app.post('/api/login', (req, res) => {
         });
     })
 });
-
 /*UPDATE*/
 app.post('/api/book/update', (req, res) => {
     Book.findByIdAndUpdate(req.body._id, req.body, {new:true}, (err, doc) => {
@@ -129,7 +126,6 @@ app.post('/api/book/update', (req, res) => {
         })
     })
 });
-
 /*DELETE*/
 app.delete('/api/delete_book', (req, res) => {
     let id = req.query.id;

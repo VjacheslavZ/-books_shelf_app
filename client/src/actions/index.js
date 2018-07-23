@@ -47,6 +47,23 @@ export function clearBookWidthReviewer() {
     }
 }
 
+export function addBook(book) {
+    const request = axios.post('/api/book', book)
+        .then(response => response.data);
+
+    return {
+        type: 'ADD_BOOK',
+        payload: request
+    }
+}
+
+export function clearNewBook() {
+    return {
+        type: "CLEAR_NEWBOOK",
+        payload: {}
+    }
+}
+
 /*USER*/
 export function loginUser({email, password}) {
     const request = axios.post('/api/login', {email, password})

@@ -116,9 +116,11 @@ app.post('/api/login', (req, res) => {
         });
     })
 });
+
 /*UPDATE*/
-app.post('/api/book/update', (req, res) => {
+app.post('/api/book_update', (req, res) => {
     Book.findByIdAndUpdate(req.body._id, req.body, {new:true}, (err, doc) => {
+
         if(err) return res.status(400).send(err);
         res.json({
             success: true,
@@ -126,10 +128,11 @@ app.post('/api/book/update', (req, res) => {
         })
     })
 });
+
 /*DELETE*/
 app.delete('/api/delete_book', (req, res) => {
     let id = req.query.id;
-    console.log(id)
+
     Book.findOneAndRemove(id, (err, doc) => {
         if(err) return res.status(400).send(err);
         res.json(true)

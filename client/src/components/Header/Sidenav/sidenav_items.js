@@ -90,7 +90,6 @@ const SidenavItems = ({user}) => {
 };
 
 function mapStateToProps(state) {
-    console.log(state)
     return {
         user: state.user
     }

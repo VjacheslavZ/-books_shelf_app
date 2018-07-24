@@ -14,6 +14,9 @@ const { auth } = require('./middleware/auth');
 
 app.use(bodyParser.json());
 app.use(cookieParser());
+
+app.use(express.static('client/build'));
+
 /*GET*/
 app.get('/api/auth', auth, (req, res)=>{
     res.json({
@@ -136,9 +139,15 @@ app.delete('/api/delete_book', (req, res) => {
     Book.findOneAndRemove(id, (err, doc) => {
         if(err) return res.status(400).send(err);
         res.json(true)
-
     })
 });
+
+if(process.env.NODE_ENV === 'production') {
+    const path = require('path');
+    app.get('/*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, '../client', 'build', 'index.html'))
+    })
+}
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

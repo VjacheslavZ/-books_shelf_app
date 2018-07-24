@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
 import {getUsers, userRegister} from '../../actions';
 
-class Register extends Component {
+class Register extends PureComponent {
     state = {
         email: '',
         name: '',
@@ -44,7 +44,16 @@ class Register extends Component {
     };
 
     componentWillReceiveProps(nextProps){
-
+        if(nextProps.user.register === false) {
+            this.setState({error: 'Error, try again'})
+        } else {
+            this.setState({
+                email: '',
+                name: '',
+                lastname: '',
+                password: '',
+            })
+        }
     }
 
     showUsers = (user) => (
@@ -60,7 +69,6 @@ class Register extends Component {
     );
 
     render() {
-        console.log(this.props);
         let user = this.props.user;
 
         return (

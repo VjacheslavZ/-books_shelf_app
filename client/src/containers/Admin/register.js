@@ -39,7 +39,7 @@ class Register extends Component {
             email: this.state.email,
             password:  this.state.password,
             name: this.state.name,
-            lastname: this.state.lastname,
+            lastName: this.state.lastname,
         }, this.props.user.users))
     };
 
